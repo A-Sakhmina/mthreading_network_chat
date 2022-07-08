@@ -34,9 +34,9 @@ public class ServerChat implements ConnectionListener {
     private void sendMsgToAllConnections(String msg) {
         System.out.println(msg);
         //if the string has been received then sent it to all clients(connections)
-        for (Connection conncect :
+        for (Connection connect :
                 connections) {
-            conncect.sendMessage(msg);
+            connect.sendMessage(msg);
         }
     }
 

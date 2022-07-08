@@ -42,10 +42,11 @@ public class Connection {
 
     public synchronized void sendMessage(String msg) {
         try {
-            out.write(msg + "\r\n");
+            if ("exit".equals(msg)) disconnect();
+            else out.write(msg + "\r\n");
             out.flush();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             disconnect();
         }
     }
