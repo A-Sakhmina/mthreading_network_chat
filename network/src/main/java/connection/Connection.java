@@ -26,8 +26,9 @@ public class Connection {
                 try {
                     listener.isConnectionReady(Connection.this);
                     while (!connectionThread.isInterrupted()) {
-                        String msg = in.readLine();
-                        listener.receiveMessage(Connection.this, msg);
+                        String msg;
+                        msg = in.readLine();
+                        if (msg != null) listener.receiveMessage(Connection.this, msg);
                     }
 
                 } catch (IOException e) {
@@ -42,7 +43,7 @@ public class Connection {
 
     public synchronized void sendMessage(String msg) {
         try {
-            if ("exit".equals(msg)) disconnect();
+            if ("/exit".equals(msg)) disconnect();
             else out.write(msg + "\r\n");
             out.flush();
         } catch (IOException e) {
